@@ -1,10 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Brand from './Brand'
 
 export default function SiteNav() {
     const [menuOpen, setMenuOpen] = useState(false)
 
     const closeMenu = () => setMenuOpen(false)
+
+    useEffect(() => {
+        if (!menuOpen) return undefined
+
+        const closeOnScroll = () => setMenuOpen(false)
+        const closeOnOutsidePointer = (event) => {
+            if (!event.target.closest('.site-nav')) setMenuOpen(false)
+        }
+
+        window.addEventListener('scroll', closeOnScroll, { passive: true })
+        document.addEventListener('pointerdown', closeOnOutsidePointer)
+
+        return () => {
+            window.removeEventListener('scroll', closeOnScroll)
+            document.removeEventListener('pointerdown', closeOnOutsidePointer)
+        }
+    }, [menuOpen])
 
     return (
         <nav className={`site-nav${menuOpen ? ' menu-open' : ''}`} aria-label="Main navigation">
