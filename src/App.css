@@ -1267,9 +1267,34 @@ footer {
 }
 
 @media (max-width:720px) {
+    body {
+        background-attachment: scroll;
+    }
+
+    main::before,
+    main::after,
+    .theme-mocha::before,
+    .theme-mocha::after,
+    .theme-green::before,
+    .theme-green::after {
+        animation: none;
+        filter: none;
+    }
+
+    .theme-mocha::before,
+    .theme-green::before {
+        opacity: .72;
+    }
+
+    .theme-mocha::after,
+    .theme-green::after {
+        opacity: .24;
+    }
+
     .site-nav {
         height: 67px;
         padding: 0 20px;
+        backdrop-filter: none;
     }
 
     .college-logo {
