@@ -10,13 +10,46 @@
 }
 
 body {
-    background: var(--paper);
+    background:
+        radial-gradient(circle at 12% 18%, rgba(92, 141, 255, .2), transparent 28%),
+        radial-gradient(circle at 86% 42%, rgba(255, 114, 92, .14), transparent 24%),
+        var(--paper);
+    background-attachment: fixed;
 }
 
 main {
-    max-width: 1440px;
-    margin: auto;
+    width: 100%;
     overflow: hidden;
+    position: relative;
+    isolation: isolate;
+}
+
+main::before,
+main::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+main::before {
+    background:
+        radial-gradient(ellipse at 18% 12%, rgba(92, 141, 255, .3), transparent 30%),
+        radial-gradient(ellipse at 84% 34%, rgba(255, 114, 92, .2), transparent 26%),
+        radial-gradient(ellipse at 45% 78%, rgba(92, 141, 255, .14), transparent 32%);
+    filter: blur(28px);
+    animation: background-drift 18s ease-in-out infinite alternate;
+}
+
+main::after {
+    opacity: .16;
+    background-image:
+        linear-gradient(rgba(230, 237, 243, .16) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(230, 237, 243, .16) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 82%, transparent 100%);
+    animation: background-grid 24s linear infinite;
 }
 
 .site-nav {
@@ -39,6 +72,13 @@ main {
     color: var(--ink);
     font: 700 17px 'Space Grotesk', sans-serif;
     letter-spacing: -.04em;
+}
+
+.college-logo {
+    width: 142px;
+    height: auto;
+    object-fit: contain;
+    margin-right: 5px;
 }
 
 .brand>span {
@@ -103,7 +143,7 @@ main {
     border-bottom: 1px solid var(--line);
     position: relative;
     overflow: hidden;
-    background: #080d14;
+    background: transparent;
 }
 
 .hero::before {
@@ -150,6 +190,12 @@ main {
 .eyebrow {
     color: var(--muted);
     margin: 0 0 23px;
+}
+
+.department-label {
+    color: #aebddd;
+    font-size: 13px;
+    letter-spacing: .08em;
 }
 
 h1,
@@ -239,21 +285,21 @@ h2 em {
     min-height: 380px;
     position: relative;
     align-self: center;
-    background: linear-gradient(135deg, #142a55, #09111e 58%, #301b2a);
-    border: 1px solid rgba(92, 141, 255, .65);
-    border-radius: 24px;
-    transform: rotate(-4deg);
+    background: linear-gradient(135deg, rgba(20, 42, 85, .98), rgba(9, 17, 30, .94) 58%, rgba(48, 27, 42, .98));
+    border: 1px solid rgba(92, 141, 255, .8);
+    border-radius: 28px;
+    transform: rotate(-3deg) translateY(-4px);
     overflow: hidden;
     isolation: isolate;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, .35);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .45), 0 0 55px rgba(92, 141, 255, .14);
 }
 
 .hero-art::before {
     content: '';
     position: absolute;
-    inset: 12px;
-    border: 1px solid rgba(230, 237, 243, .16);
-    border-radius: 16px;
+    inset: 10px;
+    border: 1px solid rgba(230, 237, 243, .22);
+    border-radius: 19px;
     z-index: 1;
     pointer-events: none;
 }
@@ -291,25 +337,25 @@ h2 em {
     top: 12%;
     left: 25%;
     border-radius: 50%;
-    background: #163875;
-    filter: blur(35px);
-    opacity: .7;
+    background: linear-gradient(135deg, #285bc0, #742f55);
+    filter: blur(42px);
+    opacity: .82;
     animation: glow-pulse 5s ease-in-out infinite;
     z-index: 0;
 }
 
 .hero-logo {
     position: absolute;
-    width: min(48%, 250px);
+    width: min(52%, 280px);
     aspect-ratio: 1;
     top: 50%;
     left: 50%;
     object-fit: cover;
-    border: 4px solid var(--coral);
+    border: 5px solid var(--coral);
     border-radius: 50%;
     transform: translate(-50%, -50%) rotate(4deg);
     z-index: 2;
-    box-shadow: 0 0 0 8px rgba(8, 13, 20, .5), 0 0 35px rgba(255, 114, 92, .35);
+    box-shadow: 0 0 0 9px rgba(8, 13, 20, .55), 0 0 45px rgba(255, 114, 92, .48);
 }
 
 .orbit {
@@ -407,6 +453,26 @@ h2 em {
     }
 }
 
+@keyframes background-drift {
+    from {
+        transform: translate3d(-4%, -2%, 0) scale(.96);
+    }
+
+    to {
+        transform: translate3d(5%, 4%, 0) scale(1.08);
+    }
+}
+
+@keyframes background-grid {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(72px, 72px, 0);
+    }
+}
+
 @keyframes grid-drift {
     from {
         transform: translateY(0);
@@ -455,6 +521,8 @@ h2 em {
 
     .hero::before,
     .hero::after,
+    main::before,
+    main::after,
     .hero-grid,
     .hero-glow,
     .hero-art::after {
@@ -972,10 +1040,49 @@ footer {
     border-top: 1px solid var(--line);
 }
 
+@media (max-width:900px) {
+    .contact-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 6px;
+    }
+
+    .contact-row>div,
+    .contact-row a,
+    .contact-row a:last-child {
+        grid-column: 1;
+        grid-row: auto;
+        min-width: 0;
+    }
+
+    .contact-row a {
+        overflow-wrap: anywhere;
+    }
+}
+
 @media (max-width:720px) {
     .site-nav {
         height: 67px;
         padding: 0 20px;
+    }
+
+    .college-logo {
+        width: 100px;
+        margin-right: 1px;
+    }
+
+    .brand {
+        gap: 6px;
+        font-size: 14px;
+    }
+
+    .brand>span {
+        width: 26px;
+        height: 26px;
+        font-size: 9px;
+    }
+
+    .brand b {
+        font-size: 8px;
     }
 
     .nav-links {
@@ -1147,22 +1254,7 @@ footer {
     }
 
     .contact-row {
-        grid-template-columns: 1fr auto;
-        gap: 6px 12px;
-    }
-
-    .contact-row>div {
-        grid-column: 1;
-    }
-
-    .contact-row a {
-        grid-column: 2;
-        grid-row: 1;
-    }
-
-    .contact-row a:last-child {
-        grid-column: 1 / -1;
-        grid-row: 2;
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .schedule-title {
