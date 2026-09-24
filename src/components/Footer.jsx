@@ -5,7 +5,8 @@ export default function Footer({ theme, onThemeChange }) {
         ['College website', 'https://aecsalem.edu.in/'],
         ['About the college', 'https://aecsalem.edu.in/vision-mission.php'],
         ['Campus directions', 'https://maps.app.goo.gl/K6DzyX7c3oPXhmZ69'],
-        ['Theme Inspiration [Omarchy]', 'https://omarchy.org/themes/'],
+        ['About the Department', 'https://aecsalem.edu.in/depart-IT.php'],
+        ['Theme Inspiration [Omarchy]', 'hsttps://omarchy.org/themes/'],
     ]
 
     return (
