@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './App.css'
 import { nonTechnicalEvents, schedule, technicalEvents } from './data'
 import ContactSection from './components/ContactSection'
@@ -12,7 +13,9 @@ function IntroStrip() {
 }
 
 function App() {
-    return <main><SiteNav /><Hero /><IntroStrip /><EventsSection technicalEvents={technicalEvents} nonTechnicalEvents={nonTechnicalEvents} /><Schedule items={schedule} /><ContactSection technicalEvents={technicalEvents} nonTechnicalEvents={nonTechnicalEvents} /><Footer /></main>
+    const [theme, setTheme] = useState('default')
+
+    return <main className={`theme-${theme}`}><SiteNav /><Hero /><IntroStrip /><EventsSection technicalEvents={technicalEvents} nonTechnicalEvents={nonTechnicalEvents} /><Schedule items={schedule} /><ContactSection technicalEvents={technicalEvents} nonTechnicalEvents={nonTechnicalEvents} /><Footer theme={theme} onThemeChange={setTheme} /></main>
 }
 
 export default App
