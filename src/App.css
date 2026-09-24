@@ -193,9 +193,43 @@ main::after {
 }
 
 .department-label {
-    color: #aebddd;
-    font-size: 13px;
+    color: var(--ink);
+    font-size: clamp(21px, 2.4vw, 34px);
+    font-weight: 500;
+    letter-spacing: .1em;
+    line-height: .95;
+    margin-bottom: 24px;
+}
+
+.hero-event-name {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 38px;
+    color: var(--coral);
+}
+
+.hero-event-name span {
+    color: var(--muted);
+    font: 11px 'DM Mono', monospace;
     letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.hero-event-name strong {
+    color: var(--blue);
+    font: 600 clamp(48px, 7vw, 100px)/.82 'Space Grotesk', sans-serif;
+    letter-spacing: -.09em;
+    text-transform: uppercase;
+}
+
+.hero-event-name b {
+    display: inline-block;
+    padding: 4px 5px;
+    color: var(--paper);
+    background: var(--coral);
+    font: 500 10px 'DM Mono', monospace;
+    letter-spacing: 0;
+    vertical-align: middle;
 }
 
 h1,
